@@ -6,7 +6,7 @@ import itertools
 import pickle
 from collections import defaultdict
 
-from methods import methods as all_methods, LearnedHeuristic
+from methods import LearnedHeuristic
 import constants
 
 def add_oracle(results:pd.DataFrame, oracle_path:str):
@@ -93,16 +93,25 @@ def pearson(method:np.ndarray, gt:np.ndarray):
 
 
 class MetricEval:
+	"""
+	Evaluates the csv created by evaluate.py against the oracle transfer performance.
 
-	def __init__(self, path:str, oracle_path:str='./results/oracle2.csv'):
+	Params:
+		- path: The path to the csv you want to evaluate.
+		- oracle_path: The path to the oracle file. This depends on which benchmark you are using.
+	"""
+
+	def __init__(self, path:str, oracle_path:str='./oracles/controlled.csv'):
 		self.results = pd.read_csv(path)
+		self.methods = list(self.results.columns)[4:]
+
 		# self.results = add_heuristic(self.results)
 		self.results = add_oracle(self.results, oracle_path)
 
 		self.results = self.results.fillna(0)
 	
 	def all_methods(self, ignore_methods:set=None):
-		methods = list(all_methods.keys()) # + ['Heuristic', 'Learned Heuristic']
+		methods = self.methods # + ['Heuristic', 'Learned Heuristic']
 		if ignore_methods is not None:
 			for method in ignore_methods:
 				methods.remove(methods.index(method))
@@ -115,7 +124,18 @@ class MetricEval:
 		add_plasticity(self.results, methods, weight)
 
 	def aggregate(self, constants:list=['Target Dataset'], methods:list=None, variance_over:str='Run', metric=pearson, aggregate:bool=True):
-		""" Returns mean, variance, all_runs. """
+		"""
+		Aggregates the results for the given methods (default all) and parameters.
+
+		Params:
+			- constants: A list of variables names to keep constant when evaluating. Constants will be averaged over, while correlation is computed over everything not constant.
+			- methods:   The subset of methods to evaluate. This defaults to all methods.
+			- variance_over: The csv column to compute variance over. Probably don't want to change this.
+			- metric: The metric function to use. See the definition of pearson for more details.
+			- aggregate: Whether or not to average over all costants. If False, this will return a separate result for every constant.
+
+		Returns mean, variance, all_runs.
+		"""
 		all_runs = []
 
 		constant_values = {

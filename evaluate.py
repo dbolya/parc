@@ -53,16 +53,15 @@ class Experiment:
 	 - runs: The number of different probes sampled per transfer. Leave as default unless you want to extract your own probe sets.
 	 - probe_only: If True, skips doing method computation and instead only extracts the probe sets.
 	 - model_bank: Which model bank to use. Options are: "controlled" (default) and "all" (includes crowd-sourced).
-	 - overwrite: Whether or not to overwrite the results file. Otherwise, you can stop and resume. When resuming, timing information will be lost.
+	 - append: If false (default), the output file will be overwritten. Otherwise, it will resume from where it left off. When resuming, timing information will be lost.
 	 - name: The name of the experiment. Defaults to the name of the probe set.
 	"""
 
-	def __init__(self, methods:Dict[str, TransferabilityMethod], budget:int=500, runs:int=5, probe_only:bool=False, model_bank:str='controlled', overwrite:bool=True, name:str=None):
+	def __init__(self, methods:Dict[str, TransferabilityMethod], budget:int=500, runs:int=5, probe_only:bool=False, model_bank:str='controlled', append:bool=False, name:str=None):
 		self.params = FixedBudgetExperimentParams(budget)
 		self.runs = runs
 		self.probe_only = probe_only
 		self.model_bank = model_bank
-		self.overwrite = overwrite
 		self.name = name if name is not None else self.params.experiment_name
 		self.methods = methods
 
@@ -71,7 +70,7 @@ class Experiment:
 		key = ['Run', 'Architecture', 'Source Dataset', 'Target Dataset']
 		headers = key + list(self.methods.keys())
 
-		self.out_cache = utils.CSVCache(self.out_file, headers, key=key)
+		self.out_cache = utils.CSVCache(self.out_file, headers, key=key, append=append)
 
 		self.times = defaultdict(list)
 		
@@ -184,6 +183,7 @@ class Experiment:
 			
 
 	def run(self):
+		""" Run the methods on the data and then saves it to out_path. """
 		last_model = None
 
 		factors = [variables['Architecture'], variables['Source Dataset'], variables['Target Dataset'], list(range(self.runs))]
