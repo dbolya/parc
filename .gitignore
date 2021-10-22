@@ -1,0 +1,11 @@
+__pycache__/
+.ipynb_checkpoints/
+
+*.pyd
+*.pyc
+
+cache/
+data/
+models/
+plots/
+results/
