@@ -3,7 +3,7 @@
 Here, we present a set of benchmarks for Scalable Diverse Model Selection.
 We also include our method, PARC, as a good baseline on this benchmark.
 
-This is the code for our NeurIPS 2021 paper available [here](coming_soon) (coming soon).
+This is the code for our NeurIPS 2021 paper available [here](https://arxiv.org/abs/2111.06977).
 
 
 ## Installing the Benchmark
