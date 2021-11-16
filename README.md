@@ -3,13 +3,14 @@
 Here, we present a set of benchmarks for Scalable Diverse Model Selection.
 We also include our method, PARC, as a good baseline on this benchmark.
 
-This is the code for our NeurIPS 2021 paper available [here](some_website).
+This is the code for our NeurIPS 2021 paper available [here](coming_soon) (coming soon).
 
 
 ## Installing the Benchmark
 To install, first clone this repo:
 ```
 git clone https://github.com/dbolya/parc.git
+cd parc
 ```
 
 Make sure your python version is at least 3.7.
@@ -18,7 +19,7 @@ Then install the requirements:
 pip install -r requirements.txt
 ```
 
-Finally, download the cached probe sets from here:   [500 Image Probe Sets](some_website)
+Finally, download the cached probe sets from here:   [500 Image Probe Sets](https://gtvault-my.sharepoint.com/:u:/g/personal/jhoffman68_gatech_edu/ET7lrR7bVLpPqGSvjud6pvcBFS4WSbDEjCozVQw-x3O0fw?e=4mQhfV)
 
 Then extract the probes into `./cache/` (or symlink it there):
 ```
@@ -27,7 +28,7 @@ unzip probes.zip -d ./cache/
 
 Verify that the probe set exists
 ```
-head ./cache/probes/fixed_budget_500
+ls ./cache/probes/fixed_budget_500 | head
 ```
 You should see a couple of probe sets `pkl` files.
 
@@ -75,7 +76,7 @@ If you wish to use PARC to recommend models for you, PARC is defined in `methods
 
 ## Advanced
 If you want the trained models, they are available here:
-[All Trained Models](some_website)
+[All Trained Models](https://gtvault-my.sharepoint.com/:u:/g/personal/jhoffman68_gatech_edu/EQLLyM-kQsBNqYYWjW-l6NMBSCCuOouP8tStz5vOqutJYg?e=djJ4Ni). Note that this only includes the models we trained from scratch, not the crowd sourced models.
 
 If you want to create the probe sets yourself, put / symlink the datasets as `./data/{dataset}/`. Then put the models above in `./models/`. This is not necessary if you use the pre-extracted probe sets instead.
 
@@ -83,5 +84,10 @@ If you want to create the probe sets yourself, put / symlink the datasets as `./
 ## Citation
 If you used PARC, this benchmark, or this code your work, please cite:
 ```
-some_citation
+@inproceedings{parc-neurips2021,
+  author    = {Daniel Bolya and Rohit Mittapalli and Judy Hoffman},
+  title     = {Scalable Diverse Model Selection for Accessible Transfer Learning},
+  booktitle = {NeurIPS},
+  year      = {2021},
+}
 ```
