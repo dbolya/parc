@@ -19,7 +19,7 @@ Then install the requirements:
 pip install -r requirements.txt
 ```
 
-Finally, download the cached probe sets from here:   [500 Image Probe Sets](https://gtvault-my.sharepoint.com/:u:/g/personal/jhoffman68_gatech_edu/ET7lrR7bVLpPqGSvjud6pvcBFS4WSbDEjCozVQw-x3O0fw?e=4mQhfV)
+Finally, download the cached probe sets from here:   [500 Image Probe Sets](https://www.dropbox.com/s/l08n4ejuip2b1h6/probes.zip?dl=0)
 
 Then extract the probes into `./cache/` (or symlink it there):
 ```
@@ -76,7 +76,7 @@ If you wish to use PARC to recommend models for you, PARC is defined in `methods
 
 ## Advanced
 If you want the trained models, they are available here:
-[All Trained Models](https://gtvault-my.sharepoint.com/:u:/g/personal/jhoffman68_gatech_edu/EQLLyM-kQsBNqYYWjW-l6NMBSCCuOouP8tStz5vOqutJYg?e=djJ4Ni). Note that this only includes the models we trained from scratch, not the crowd sourced models.
+[All Trained Models](https://www.dropbox.com/s/gk32wdqmf19lnmt/models.zip?dl=0). Note that this only includes the models we trained from scratch, not the crowd sourced models.
 
 If you want to create the probe sets yourself, put / symlink the datasets as `./data/{dataset}/`. Then put the models above in `./models/`. This is not necessary if you use the pre-extracted probe sets instead.
 
